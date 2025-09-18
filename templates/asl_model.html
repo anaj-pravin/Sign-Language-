@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASL Interpreter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_2.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ASL Interpreter</h1>
+        <p class="subtitle">Real-time American Sign Language translation</p>
+
+        <div class="content">
+            <div class="video-section">
+                <div class="video-card">
+                    <span class="video-label">Video Feed</span>
+                    <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Video Feed" onerror="handleVideoError()" />
+                    <p id="video-error" style="display: none; color: red;">Failed to load video feed. Please check camera connection and refresh the page.</p>
+                </div>
+            </div>
+
+            <div class="text-section">
+                <div class="text-card">
+                    <textarea id="recognized-text" placeholder="Type or wait for recognition..." rows="5"></textarea>
+                </div>
+                <div class="button-container">
+                    <button id="backspace-btn" onclick="backspaceText()">Backspace</button>
+                    <button id="clear-btn" onclick="clearText()">Clear</button>
+                    <button id="speak-btn" onclick="speakText()">Speak</button>
+                    <button id="copy-btn" onclick="copyText()">Copy</button>
+                </div>
+                <div class="save-input">
+                    <input type="text" id="filename" placeholder="Enter filename" class="filename-input">
+                    <button id="save-confirm-btn" onclick="confirmSave()">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="instructions">Position your hand clearly in front of the camera for best results.</p>
+    </div>
+
+<div id="loading" style="display: none;"></div>
+
+    <!-- Load Socket.IO client library from CDN -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- Include your custom JavaScript -->
+    <script src="{{ url_for('static', filename='script_2.js') }}"></script>
+</body>
+</html>

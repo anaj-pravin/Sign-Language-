@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Breaking communication barriers with ASL translation technology" />
+    <title>Sign Language Universe | ASL Translation Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="universe-container">
+        <div class="cosmos-background"></div>
+        <div class="star-field" id="starField"></div>
+        <div class="starburst" id="starburst"></div>
+        <div class="hand-container" id="handContainer"></div>
+
+        <!-- Navigation -->
+        <div class="nav-placeholder">
+            <div class="logo">ASL UNIVERSE</div>
+            <div class="nav-links">
+
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="title-container">
+                <h1 class="title">Connect</h1>
+                <h2 class="subtitle">Without Words</h2>
+            </div>
+            <p class="tagline">Breaking barriers through ASL translation technology</p>
+            <button class="try-button" onclick="window.location.href='{{ url_for('asl_model') }}'">
+                Try Our ASL Model
+            </button>   
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-placeholder">
+            <p>© 2025 ASL Translation Project. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

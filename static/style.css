@@ -1,0 +1,320 @@
+/* Reset and base styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #86c9ff;
+    --background-color: #000000;
+    --accent-color: rgba(138, 180, 248, 0.8);
+    --text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    --hand-color: rgba(255, 255, 255, 0.9);
+}
+
+@font-face {
+    font-family: 'SpaceFont';
+    src: local('Helvetica Neue'), local('Arial'), sans-serif;
+    font-display: swap;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: 'SpaceFont', 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Main container */
+.universe-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Background effects */
+.cosmos-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(15, 15, 35, 1) 0%, rgba(0, 0, 0, 1) 70%);
+    z-index: 1;
+}
+
+.star-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.star {
+    position: absolute;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+.starburst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    z-index: 3;
+}
+
+.ray {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 0;
+    transform-origin: bottom;
+    background: linear-gradient(to top, var(--accent-color), transparent);
+    animation: rayGrow 2s forwards;
+}
+
+@keyframes rayGrow {
+    from { height: 0; }
+    to { height: var(--ray-length); }
+}
+
+.node {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: var(--accent-color);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px var(--accent-color);
+    opacity: 0;
+    animation: nodeAppear 2.5s forwards;
+}
+
+.node--bright {
+    width: 5px; /* Reduced from 7px */
+    height: 5px; /* Reduced from 7px */
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
+@keyframes nodeAppear {
+    0% { opacity: 0; }
+    70% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Content */
+.content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1200px;
+    animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    text-shadow: var(--text-shadow);
+    transform: translateZ(0);
+}
+
+.subtitle {
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--secondary-color);
+    text-shadow: var(--text-shadow);
+    transform: translateZ(0);
+}
+
+.tagline {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 1s;
+}
+
+/* Hand icon styling */
+.hand-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.hand {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: var(--hand-color);
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 10px var(--hand-color);
+    opacity: 0;
+    animation: handAppear 3s forwards;
+}
+
+@keyframes handAppear {
+    0% { opacity: 0; transform: scale(0); }
+    70% { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Try Model Button Styling */
+.try-button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 1.5s;
+}
+
+.try-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    transform: scale(1.05);
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .title, .subtitle {
+        font-size: 4rem;
+    }
+    .tagline {
+        font-size: 1.3rem;
+    }
+    .try-button {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title, .subtitle {
+        font-size: 3rem;
+    }
+    .tagline {
+        font-size: 1.1rem;
+    }
+    .try-button {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title, .subtitle {
+        font-size: 2.5rem;
+    }
+    .tagline {
+        font-size: 1rem;
+    }
+    .try-button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+/* Navigation placeholder */
+.nav-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: 20;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+    animation-delay: 2s;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Footer placeholder */
+.footer-placeholder {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+    font-size: 0.8rem;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+    animation-delay: 2.5s;
+}
